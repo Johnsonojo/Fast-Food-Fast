@@ -1,0 +1,822 @@
+@import './normalize.css';
+
+/* BASIC STYLING */
+
+body {
+    font-family: "Nunito", sans-serif;
+    font-size: 16px;
+    /* padding: 8px; */
+    width: 100%;
+    height: 100%;
+    background: #f9f9f9;
+    margin: 0;
+    display: flex;
+    /* min-height: 100%; */
+    flex-direction: column;
+    /* color: white; */
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../img/nigerian-meatpies.jpg) no-repeat center center;
+    background-color: white;
+    background-size: cover;
+    background-attachment: fixed;
+    justify-content: space-between;
+}
+
+.admin {
+    background: none;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+
+/* FOOTER */
+
+.footer,
+.footer.change {
+    /* position: fixed; */
+    display: flex;
+    height: 60px;
+    /* background-color: black; */
+    padding: 0 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.footer {
+    color: black;
+}
+
+.footer.change {
+    color: white
+}
+
+.footer p,
+.footer.change {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.row {
+    display: -ms-flexbox;
+    /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap;
+    /* IE10 */
+    flex-wrap: wrap;
+    margin: 0 -10px;
+    /* height: 100%; */
+    /* width: 100%; */
+}
+
+.col-25 {
+    -ms-flex: 25%;
+    /* IE10 */
+    flex: 25%;
+}
+
+.col-15 {
+    flex: 30%;
+}
+
+.col-40 {
+    -ms-flex: 40%;
+    /* IE10 */
+    flex: 40%;
+}
+
+.col-50 {
+    -ms-flex: 45%;
+    /* IE10 */
+    flex: 45%;
+}
+
+.col-75 {
+    -ms-flex: 75%;
+    /* IE10 */
+    flex: 75%;
+}
+
+.col-25,
+.col-50,
+.col-75 {
+    padding: 0 16px;
+}
+
+.container {
+    background-color: #f2f2f2e3;
+    padding: 20px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    width: 50%;
+    margin: auto;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    height: 100%;
+}
+
+.main-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-top: 70px; */
+    flex-grow: 10;
+}
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+label {
+    margin-bottom: 10px;
+    margin-top: 15px;
+    display: block;
+}
+
+.add-food,
+.landing {
+    text-align: center;
+    color: white;
+    font-size: 26px;
+}
+
+
+/* BUTTONS */
+
+.btn {
+    border-radius: 3px;
+    border-style: none;
+    /* margin: 10px 0; */
+    padding: 8px;
+    /* padding: 10px 50px; */
+    font-family: "Nunito", sans-serif;
+    font-size: 17px;
+    /* font-weight: bold; */
+    /* position: relative; */
+    overflow: hidden;
+    outline: none;
+}
+
+.btn-pri {
+    border: 2px solid #4CAF50;
+    background-color: #4CAF50;
+    color: #FFFFFF;
+}
+
+.btn-pri:hover,
+.btn-pri.focus,
+.btn-pri.active {
+    transition: background-color 0.5s, border-color 0.5s;
+    background-color: #449d48;
+    border-color: #449d48;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.btn-pri-danger {
+    border: 2px solid #d50000;
+    background-color: #d50000;
+    color: #FFFFFF;
+}
+
+.btn-pri-danger:hover,
+.btn-pri-danger.focus,
+.btn-pri-danger.active {
+    transition: background-color 0.5s, border-color 0.5s;
+    background-color: #bc0000;
+    border-color: #bc0000;
+    color: #FFFFFF;
+}
+
+.btn-sec {
+    /* border: 2px solid #4CAF50; */
+    background-color: transparent;
+    color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.btn-sec:hover,
+.btn-sec.focus,
+.btn-sec.active {
+    transition: background-color 0.5s, color 0.5s, border-color 0.5s;
+    background-color: #449d48;
+    border-color: #449d48;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-sec-danger {
+    /* border: 2px solid #d50000; */
+    background-color: transparent;
+    color: #d50000;
+    border-color: #d50000;
+}
+
+.btn-sec-danger:hover,
+.btn-sec-danger.focus,
+.btn-sec-danger.active {
+    transition: background-color 0.5s, color 0.5s, border-color 0.5s;
+    background-color: #bc0000;
+    border-color: #bc0000;
+    color: white;
+    cursor: pointer;
+}
+
+.control-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+    .control-btns .btn {
+        border: 0;
+        padding: 20px 0 0 0;
+        font-size: 1.5em;
+    }
+    .control-btns .btn:hover,
+    .control-btns .btn:focus,
+    .control-btns .btn:active {
+        background-color: transparent;
+        border: 0;
+        color: #449d48;
+    }
+}
+
+.w-40 {
+    width: 40%;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.w-75 {
+    width: 75%;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.add-order-btn {
+    background-color: none;
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+}
+
+hr {
+    border: 1px solid lightgrey;
+}
+
+span.price {
+    float: right;
+    color: black;
+}
+
+
+/* .col-50 .container>div {
+    display: flex;
+    flex-direction: row;
+} */
+
+select {
+    background-color: inherit;
+    padding: 0.3em 0.3em 0.3em 0em;
+    outline: none;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    /* width: 15%; */
+}
+
+.order-input {
+    width: 25px;
+    background-color: inherit;
+    outline: none;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+}
+
+
+/* .order-content {
+    display: flex;
+} */
+
+.container .order-content>div {
+    display: flex;
+}
+
+.container .order-content>div p:nth-child(1),
+.container .order-content>div p:nth-child(3) {
+    flex-grow: 1;
+}
+
+.container .order-content>div p:nth-child(3) {
+    text-align: right;
+}
+
+.container .order-content>div select {
+    flex-grow: 1;
+}
+
+
+/* inspiration from w3school.com */
+
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+
+@media (max-width: 800px) {
+    .row {
+        flex-direction: column;
+    }
+    .col-25 {
+        margin-bottom: 20px;
+    }
+}
+
+
+/* CARD GROUP */
+
+.card-group {
+    float: left;
+    width: 33%;
+    padding: 0 10px;
+}
+
+
+/* Remove extra left and right margins, due to padding */
+
+.card-row {
+    margin: 0 -5px;
+}
+
+
+/* Clear floats after the columns */
+
+.card-row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+}
+
+@media screen and (max-width: 838px) {
+    .card-group {
+        width: 50%;
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .card-group {
+        width: 100%;
+    }
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 3%;
+    padding: 7px;
+    text-align: center;
+    background-color: white;
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+
+.dashboard,
+.admin-table {
+    margin: auto;
+    width: 75%;
+}
+
+.app {
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+.dashboard h3.topmessage,
+h2.topmessage {
+    text-align: center;
+    color: white;
+}
+
+h2.topmessag,
+h3.topmessag {
+    text-align: center;
+    color: black;
+}
+
+h2.topmessages {
+    color: white;
+}
+
+.text-center {
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .card img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .dashboard {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+}
+
+.order-btn {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    height: 40px;
+    border: none;
+    border-radius: 7px;
+    box-shadow: 1px 2px #dbd8d8;
+    cursor: pointer;
+}
+
+.order-btn a {
+    color: white;
+}
+
+hr {
+    border: 1px solid #f7f3f3;
+}
+
+
+/* SIDE NAV */
+
+.sidenav {
+    border-bottom: 1px solid #eaeaeb;
+    text-align: right;
+    height: 70px;
+    line-height: 70px;
+    background-color: #f6f6f6;
+}
+
+.menu {
+    margin: 0 30px 0 0;
+}
+
+.menu a {
+    clear: right;
+    text-decoration: none;
+    color: black;
+    margin: 0 20px;
+    line-height: 70px;
+    padding: 10px;
+}
+
+.menu a:hover {
+    background-color: #4CAF50;
+    color: #f9f9f9;
+    border-radius: 3px;
+}
+
+.menu a.sitelink {
+    color: #45a049;
+    font-family: 'Fugaz One', cursive;
+    font-weight: bold;
+    float: left;
+    clear: right;
+    text-decoration: none;
+    /* margin: 0 20px; */
+    line-height: 70px;
+    padding: 0 10px 10px 10px;
+    font-size: 20px;
+}
+
+.menu a.sitelink:hover {
+    background-color: transparent;
+}
+
+.sidenav label {
+    margin: 0 40px 0 0;
+    font-size: 32px;
+    line-height: 70px;
+    display: none;
+    width: 26px;
+    float: right;
+}
+
+.index {
+    background: none;
+    border: none;
+}
+
+.index a.link,
+.index label {
+    color: white;
+}
+
+#toggle {
+    display: none;
+}
+
+form {
+    padding-bottom: 40px;
+}
+
+@media only screen and (max-width: 720px) {
+    .sidenav label {
+        display: block;
+        cursor: pointer;
+    }
+    .menu {
+        text-align: center;
+        display: none;
+        position: absolute;
+        width: 100%;
+        right: 0;
+        margin-right: 0;
+        background-color: #000000f2;
+        top: 14%;
+        z-index: 50;
+    }
+    .menu a.sitelink {
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid white;
+    }
+    .menu a {
+        display: block;
+        border-bottom: 1px solid #eaeaeb;
+        margin: 0;
+        color: #fafafa;
+    }
+    .sidenav {
+        border-bottom: none;
+    }
+    .container {
+        width: 101%;
+        /* border-radius: 15px; */
+    }
+    form {
+        padding-bottom: 40px;
+    }
+}
+
+#toggle:checked+.menu {
+    display: block;
+}
+
+
+/* ADMIN PAGE */
+
+.func-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.warning {
+    color: orange;
+}
+
+.success {
+    color: #45a049;
+}
+
+.danger {
+    color: #f10101;
+}
+
+
+/* ORDER HISTORY */
+
+.order-history-pane {
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 0 4.16667%;
+    margin-bottom: 3.33333%;
+}
+
+.order-history-head,
+.order-history-foot {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.container .order-summary>div {
+    display: flex;
+}
+
+.container .order-summary>div p:nth-child(1),
+.container .order-summary>div p:nth-child(3) {
+    flex-grow: 1;
+}
+
+.container .order-summary>div p:nth-child(3) {
+    text-align: right;
+}
+
+.order-summary {
+    padding: 15px;
+}
+
+
+/* TABLE */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th,
+td {
+    text-align: left;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    color: #45a049;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+.history-table {
+    overflow-x: auto;
+}
+
+
+/* DELETE BUTTON MODAL */
+
+
+/* inspitation from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_bottom */
+
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    -webkit-animation-name: fadeIn;
+    /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+
+/* Modal Content */
+
+.modal-content {
+    position: fixed;
+    bottom: 0;
+    background-color: #fefefe;
+    width: 100%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+}
+
+
+/* The Close Button */
+
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {
+    padding: 2px 16px;
+}
+
+
+/* .modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+} */
+
+@media only screen and (max-width: 600px) {
+    .modal-content {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 601px) {
+    .modal-content {
+        width: 60%;
+        margin-left: 19%;
+        margin-right: 10%;
+    }
+}
+
+
+/* Add Animation to modal*/
+
+@-webkit-keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
+    }
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+}
+
+@keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
+    }
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
