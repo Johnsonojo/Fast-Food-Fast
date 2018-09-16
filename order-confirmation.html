@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/css/normalize.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <title>Fast-Food-Fast</title>
+</head>
+
+<body>
+    <!-- NAV -->
+    <div class="sidenav">
+        <label for="toggle">&#9776;</label>
+        <input type="checkbox" id="toggle">
+        <div class="menu">
+            <a href="index.html" class="sitelink">Fast-Food-Fast</a>
+            <a href="user-dashboard.html" class="link">Available Food</a>
+            <a href="user-order-history.html" class="link">My Order</a>
+            <a href="login.html" class="link">Logout</a>
+        </div>
+    </div>
+
+    <h2 class="topmessage">Your Order Details</h2>
+
+    <div class="order-summary">
+        <!-- <div class="row"> -->
+        <div class="col-50">
+            <div class="container">
+                <h3 class="topmessag">Cart</h3>
+                <hr>
+                <div class="order-content">
+                    <div>
+                        <p><input type="number" class="order-input" value="2" min="1"></p>
+                        <select class="food-options">
+                                <option>Jollof Rice</option>
+                                <option>Beef Hamburger</option>
+                                <option>Meat Pie</option>
+                                <option>Chicken and Chips</option>
+                                <option>Glazed Donut</option>
+                                <option>Beef Shawarma</option>
+                                <option>Chicken Shawarma</option>
+                                <option>Yamarita</option>
+                                </select>
+                        <p>&#8358;300.00</p>
+                    </div>
+
+                    <div>
+                        <p><input type="number" class="order-input" value="2" min="1"></p>
+                        <select class="food-options">
+                                <option>Beef Shawarma</option>
+                                <option>Beef Hamburger</option>
+                                <option>Meat Pie</option>
+                                <option>Chicken and Chips</option>
+                                <option>Glazed Donut</option>
+                                <option>Chicken Shawarma</option>
+                                <option>Jollof Rice</option>
+                                <option>Yamarita</option>
+                                </select>
+                        <p>&#8358;500.00</p>
+                    </div>
+
+                    <div>
+                        <p><input type="number" class="order-input" value="3" min="1"></p>
+                        <select class="food-options">
+                            <option>Meat Pie</option>
+                            <option>Beef Hamburger</option>
+                            <option>Chicken and Chips</option>
+                                <option>Glazed Donut</option>
+                                <option>Beef Shawarma</option>
+                                <option>Chicken Shawarma</option>
+                                <option>Jollof Rice</option>
+                                <option>Yamarita</option>
+                                </select>
+                        <p>&#8358;700.00</p>
+                    </div>
+
+                    <div>
+                        <p><input type="number" class="order-input" value="1" min="1"></p>
+                        <select class="food-options">
+                            <option>Glazed Donut</option>
+                            <option>Beef Hamburger</option>
+                            <option>Chicken and Chips</option>
+                            <option>Meat Pie</option>
+                                <option>Beef Shawarma</option>
+                                <option>Chicken Shawarma</option>
+                                <option>Jollof Rice</option>
+                                <option>Yamarita</option>
+                            </select>
+                        <p><span class="price">&#8358;900.00</span></p>
+                    </div>
+                </div>
+                <hr>
+                <p>Subtotal <span class="price"><b>&#8358;2400.00</b></span></p>
+                <p>VAT <span class="price"><b>&#8358;30.00</b></span></p>
+                <hr>
+                <p>Total <span class="price"><b>&#8358;2430.00</b></span></p>
+            </div>
+        </div>
+        <br>
+        <div class="col-50">
+            <div class="container">
+                <form action="./user-final-checkout.html">
+                    <div class="row">
+                        <div class="col-50">
+                            <h3 class="topmessag">Delivery Details</h3>
+                            <hr>
+                            <label for="phone">Phone Number</label>
+                            <input type="text" id="phone" name="phonenumber" placeholder="+234">
+                            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                            <input type="text" id="adr" name="address" placeholder="235 Ikorodu road">
+                            <label for="city"><i class="fa fa-institution"></i> City</label>
+                            <input type="text" id="city" name="city" placeholder="Anthony">
+                        </div>
+                    </div>
+                    <div class="add-food">
+                        <a href="#"><button class="btn btn-pri">Continue to checkout</button></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>
+    <br><br>
+
+    <div class="footer change">
+        <p>&copy; 2018. fast-food-fast. All images from Google.</p>
+    </div>
+</body>
+
+</html>
