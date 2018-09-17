@@ -4,6 +4,9 @@ import logger from 'volleyball';
 import bodyParser from 'body-parser';
 import validation from 'express-validator';
 
+// importing the routes
+import routecontroller from './dummyApi/route/index';
+
 // Setup the express app
 const app = express();
 
@@ -21,6 +24,9 @@ app.get('/', (req, res) => res.status(200).json({
 
 
 app.use(validation());
+
+// configuring the app to use the eoute
+app.use(routecontroller);
 
 const PORT = process.env.PORT || 8000;
 
