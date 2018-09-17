@@ -11,7 +11,7 @@ class OrderValidator {
 
     static checkOrderId(req, res, next) {
         req.checkParams('orderId', 'Order id must not be empty').notEmpty();
-        req.checkParams('OrderId', 'Order id must be an integer').isInt();
+        req.checkParams('orderId', 'Order id must be an integer').isInt();
 
         const errors = req.validationErrors();
 
@@ -77,3 +77,4 @@ class OrderValidator {
         return next();
     }
 }
+export default OrderValidator;
