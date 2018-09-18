@@ -83,30 +83,5 @@ class OrderValidator {
         }
         return next();
     }
-
-    /**
-     * validates food items input fields
-     * @param {Object} req
-     * @param {Object} res
-     * @param {Function} next
-     * @return {object}
-     */
-    static checkfoodBody(req, res, next) {
-        req.checkBody('foodId', 'food id must not be empty').notEmpty().isInt();
-        req.checkBody('foodName', 'food name must not be empty').notEmpty().isString();
-        req.checkBody('foodPrice', 'food price must not be empty').notEmpty().isInt();
-        req.checkBody('qty', 'Quanty must be an integer').notEmpty().isInt();
-
-        const errors = req.validationErrors();
-
-        if (errors) {
-            return res.status(404).json({
-                status: 'failure',
-                message: 'Food items validation not successful',
-                data: errors,
-            });
-        }
-        return next();
-    }
 }
 export default OrderValidator;
