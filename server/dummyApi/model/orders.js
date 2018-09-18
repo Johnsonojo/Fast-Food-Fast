@@ -1,7 +1,7 @@
 const orders = [{
     orderId: 1,
     userId: 1,
-    foodItem: [{
+    foodItems: [{
         foodName: 'Yamarita',
         foodPrice: 900.00,
         qty: 3,
@@ -13,7 +13,7 @@ const orders = [{
 }, {
     orderId: 2,
     userId: 2,
-    foodItem: [{
+    foodItems: [{
         foodName: 'Chicken Shawarma',
         foodPrice: 700.00,
         qty: 1,
@@ -25,7 +25,7 @@ const orders = [{
 }, {
     orderId: 3,
     userId: 3,
-    foodItem: [{
+    foodItems: [{
         foodName: 'Beef Hambuger',
         foodPrice: 800.00,
         qty: 3,
