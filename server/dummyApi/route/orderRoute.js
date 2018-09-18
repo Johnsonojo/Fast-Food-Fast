@@ -19,4 +19,9 @@ orderRouter
     .post('/', orderValidator.checkOrderBody,
         orderController.addNewOrder);
 
+orderRouter
+    .put('/:orderId',
+        orderValidator.checkOrderStatus,
+        orderController.updateAnOrder);
+
 export default orderRouter;

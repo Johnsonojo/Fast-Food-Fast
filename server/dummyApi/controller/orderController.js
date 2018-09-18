@@ -63,7 +63,7 @@ export default class Order {
         };
         foodItems.push(addFood);
 
-        let userId = userDb.length + 1;
+        const userId = userDb.length + 1;
         const newOrder = {
             orderId: orderDb.length + 1,
             userId,
@@ -79,5 +79,32 @@ export default class Order {
             message: 'New order was created',
             data: orderDb[orderDb.length - 1],
         });
+    }
+
+    /**
+     * @description updates an order status
+     * @param {object} req
+     * @param {object} res
+     * @return {object}
+     */
+    static updateAnOrder(req, res) {
+        const orderId = parseInt(req.params.orderId, 10);
+
+        const result = orderDb.find(order => order.orderId === orderId);
+
+        if (!result) {
+            res.status(404).json({
+                status: 'failure',
+                message: 'Order not found',
+            });
+        } else {
+            orderDb[req.params.orderId - 1].orderStatus = req.body.orderStatus;
+            return res.status(200).json({
+                message: `orderStatus  of order ${result.orderId} is updated`,
+                status: 'success',
+                data: orderDb[req.params.orderId - 1],
+            });
+
+        }
     }
 }
