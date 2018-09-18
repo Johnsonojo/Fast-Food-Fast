@@ -10,6 +10,13 @@ const orderRouter = express.Router();
 
 orderRouter.get('/', orderController.getAllOrders);
 
-orderRouter.get('/:orderId', orderValidator.checkOrderId, orderController.getOneOrder);
+orderRouter
+    .get('/:orderId',
+        orderValidator.checkOrderId,
+        orderController.getOneOrder);
+
+orderRouter
+    .post('/', orderValidator.checkOrderBody,
+        orderController.addNewOrder);
 
 export default orderRouter;

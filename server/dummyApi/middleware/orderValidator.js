@@ -1,4 +1,5 @@
-/**@description A class for validating various input*/
+/**@description A class for validating various input
+ */
 
 class OrderValidator {
     /**
@@ -33,9 +34,12 @@ class OrderValidator {
      * @return {object}
      */
     static checkOrderBody(req, res, next) {
-        req.checkBody('foodItems', 'Order food items should not be empty').notEmpty();
-        req.checkBody('foodItems', 'food items should be an array').isArray();
-        req.checkBody('status', 'You must enter a status for your order').notEmpty();
+        req.checkBody('foodName', 'food name must not be empty').notEmpty().isString();
+        req.checkBody('foodPrice', 'food price must not be empty').notEmpty().isInt();
+        req.checkBody('qty', 'Quantity must be an integer').notEmpty().isInt();
+        req.checkBody('orderStatus', 'You must enter a status for your order').notEmpty().isString();
+        req.checkBody('deliveryAddress', 'You must enter a delivery address for your order').notEmpty().isString();
+        // req.checkBody('foodId', 'food id must not be empty').notEmpty().isInt();
 
         const errors = req.validationErrors();
 
@@ -57,12 +61,9 @@ class OrderValidator {
      * @return {object}
      */
     static checkfoodBody(req, res, next) {
-        req.checkBody('foodId', 'food id must not be empty').notEmpty();
-        req.checkBody('foodId', 'food id must be an integer').isInt();
-        req.checkBody('foodName', 'food name must not be empty').notEmpty();
-        req.checkBody('foodName', 'food name must not be a string').isString();
-        req.checkBody('foodPrice', 'food price must not be empty').notEmpty();
-        req.checkBody('foodPrice', 'food price must be an integer').isInt();
+        req.checkBody('foodId', 'food id must not be empty').notEmpty().isInt();
+        req.checkBody('foodName', 'food name must not be empty').notEmpty().isString();
+        req.checkBody('foodPrice', 'food price must not be empty').notEmpty().isInt();
         req.checkBody('qty', 'Quanty must be an integer').notEmpty().isInt();
 
         const errors = req.validationErrors();
