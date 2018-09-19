@@ -12,7 +12,6 @@ https://www.pivotaltracker.com/n/projects/2196360
 https://johnsonojo.github.io/Fast-Food-Fast/
 
 ## Table of Content
-<!-- * [Problem Statement](#problem) -->
 * [Features](#features)
 * [Background](#background)
 * [Installation](#installation)
