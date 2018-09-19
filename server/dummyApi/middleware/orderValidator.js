@@ -76,7 +76,7 @@ class OrderValidator {
 
         if (errors) {
             return res.status(404).json({
-                status: 'failure',
+                status: 'Failure',
                 message: 'Order validation not successful',
                 data: errors,
             });

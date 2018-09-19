@@ -7,23 +7,12 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 describe('Order Controller', () => {
-    // const foodItems = [];
-    // const addFood = {
-    //     foodName: 'Yamarita',
-    //     foodPrice: 900.00,
-    //     qty: 3,
-    // };
-    // const totalAmount = qty * foodPrice;
-    // foodItems.push(addFood);
-
-    // const userId = userDb.length + 1; 
     const newOrder = {
         foodName: 'Meat Pie',
-        foodPrice: '250',
-        qty: '9',
-        orderStatus: 'kjhg',
+        foodPrice: 250,
+        qty: 9,
+        orderStatus: 'Completed',
         deliveryAddress: '29, Ikorodu road Lagos'
-            // totalAmount,
     };
 
     // test for posting an order
@@ -32,38 +21,142 @@ describe('Order Controller', () => {
             .post('/api/v1/orders')
             .send(newOrder)
             .end((err, res) => {
-                console.log(res.body);
                 expect(res.status).to.equal(201);
-                expect(res.body.status).to.equal('success');
+                expect(res.body.status).to.equal('Success');
                 expect(res.body.message).to.equal('New order was created');
-
-                // expect(res.body.data.orderId).to.be.eql(newOrder.orderId);
-                // expect(res.body.data.userId).to.be.eql(newOrder.userId);
-                // expect(res.body.data).to.be.eql(newOrder.foodItems[0].foodName);
-                // expect(res.body.data[0].foodPrice).to.be.eql(newOrder.foodItems[0].foodPrice);
-                // expect(res.body.data[0].qty).to.be.eql(newOrder.foodItems[0].qty);
-                // expect(res.body.data.totalAmount).to.be.eql(newOrder.totalAmount);
-                // expect(res.body.data.orderStatus).to.be.eql(newOrder.orderStatus);
-                // expect(res.body.data.deliveryAddress).to.be.eql(newOrder.deliveryAddress);
-                // expect(res.body.data.orderDate).to.be.eql(newOrder.orderDate);
+                expect(res.body.data.orderId).to.be.eql(4);
+                expect(res.body.data.orderStatus).to.be.eql('Completed');
+                expect(res.body.data.totalAmount).to.be.eql(2250);
                 done(err);
             });
     });
-    //         {
-    //     status: 'success',
-    //     message: 'New order was created',
-    //     data: {
-    //         orderId: 4,
-    //         userId: 4,
-    //         foodItems: [
-    //             [Object]
-    //         ],
-    //         orderStatus: 'kjhg',
-    //         totalAmount: 2250,
-    //         deliveryAddress: '29, Ikorodu road Lagos',
-    //         orderDate: '2018-09-19T19:03:01.988Z'
-    //     }
-    // }
+
+    // test for posting an order with an empty food name
+    it('should not create a new order with an empty food name', (done) => {
+        const newOrder = {
+            foodName: '',
+            foodPrice: 250,
+            qty: 9,
+            orderStatus: 'Completed',
+            deliveryAddress: '29, Ikorodu road Lagos'
+        };
+        chai.request(server)
+            .post('/api/v1/orders')
+            .send(newOrder)
+            .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body.status).to.equal('Failure');
+                expect(res.body.message).to.equal('Order validation not successful');
+                expect(res.body.data[0].msg).to.equal('food name must not be empty');
+                done(err);
+            });
+    });
+
+    // test for posting an order with an integer as food name
+    it('should not create a new order with food name as an integer', (done) => {
+        const newOrder = {
+            foodName: 2,
+            foodPrice: 250,
+            qty: 9,
+            orderStatus: 'Completed',
+            deliveryAddress: '29, Ikorodu road Lagos'
+        };
+        chai.request(server)
+            .post('/api/v1/orders')
+            .send(newOrder)
+            .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body.status).to.equal('Failure');
+                expect(res.body.message).to.equal('Order validation not successful');
+                expect(res.body.data[0].msg).to.equal('food name must be a string');
+                done(err);
+            });
+    });
+
+
+    // test for posting an order with an empty food price
+    it('should not create a new order without a food price', (done) => {
+        const newOrder = {
+            foodName: 'Meat Pie',
+            foodPrice: '',
+            qty: 9,
+            orderStatus: 'Completed',
+            deliveryAddress: '29, Ikorodu road Lagos'
+        };
+        chai.request(server)
+            .post('/api/v1/orders')
+            .send(newOrder)
+            .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body.status).to.equal('Failure');
+                expect(res.body.message).to.equal('Order validation not successful');
+                expect(res.body.data[0].msg).to.equal('food price must not be empty');
+                done(err);
+            });
+    });
+
+    // test for posting an order with a food price as a string
+    it('should not create a new order with a food price as string', (done) => {
+        const newOrder = {
+            foodName: 'Meat Pie',
+            foodPrice: 'hi',
+            qty: 9,
+            orderStatus: 'Completed',
+            deliveryAddress: '29, Ikorodu road Lagos'
+        };
+        chai.request(server)
+            .post('/api/v1/orders')
+            .send(newOrder)
+            .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body.status).to.equal('Failure');
+                expect(res.body.message).to.equal('Order validation not successful');
+                expect(res.body.data[0].msg).to.equal('food price must be an integer');
+                done(err);
+            });
+    });
+
+    // test for posting an order with a qty as a string
+    it('should not create a new order with a food qty as string', (done) => {
+        const newOrder = {
+            foodName: 'Meat Pie',
+            foodPrice: 300,
+            qty: 'hello',
+            orderStatus: 'Completed',
+            deliveryAddress: '29, Ikorodu road Lagos'
+        };
+        chai.request(server)
+            .post('/api/v1/orders')
+            .send(newOrder)
+            .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body.status).to.equal('Failure');
+                expect(res.body.message).to.equal('Order validation not successful');
+                expect(res.body.data[0].msg).to.equal('Quantity must be an integer');
+                done(err);
+            });
+    });
+
+    // test for posting an order with an empty qty
+    it('should not create a new order with an empty qty', (done) => {
+        const newOrder = {
+            foodName: 'Meat Pie',
+            foodPrice: 300,
+            qty: '',
+            orderStatus: 'Completed',
+            deliveryAddress: '29, Ikorodu road Lagos'
+        };
+        chai.request(server)
+            .post('/api/v1/orders')
+            .send(newOrder)
+            .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body.status).to.equal('Failure');
+                expect(res.body.message).to.equal('Order validation not successful');
+                expect(res.body.data[0].msg).to.equal('Quantity must not be empty');
+                done(err);
+            });
+    });
 
     // test for getting all orders
     it('should get all orders', (done) => {
@@ -83,54 +176,38 @@ describe('Order Controller', () => {
         chai.request(server)
             .get('/api/v1/orders/4')
             .end((err, res) => {
-                console.log(res.body);
-                const {
-                    foodName,
-                    foodPrice,
-                    qty,
-                    orderStatus,
-                    deliveryAddress,
-                    orderDate,
-                } = newOrder;
                 expect(res.status).to.equal(200);
-                // expect(res.body.data.orderId).to.be.eql(orderId);
-                // expect(res.body.data.userId).to.be.eql(userId);
-                // expect(res.body.data.foodItems[0].foodName).to.be.eql(foodItems[0].foodName);
-                // expect(res.body.data.foodItems[0].foodPrice).to.be.eql(foodItems[0].foodPrice);
-                // expect(res.body.data.foodItems[0].qty).to.be.eql(foodItems[0].qty);
-                // expect(res.body.data.totalAmount).to.be.eql(totalAmount);
-                // expect(res.body.data.orderStatus).to.be.eql(orderStatus);
-                // expect(res.body.data.deliveryAddress).to.be.eql(deliveryAddress);
-                // expect(res.body.data.orderDate).to.be.eql(orderDate);
+                expect(res.body.status).to.equal('Success');
+                expect(res.body.message).to.equal('Order  4  fetched');
+                expect(res.body.data.orderId).to.be.eql(4);
+                expect(res.body.data.userId).to.be.eql(4);
+                expect(res.body.data.totalAmount).to.be.eql(2250);
+                expect(res.body.data.orderStatus).to.be.eql('Completed');
                 done(err);
             });
     });
 
-    // test for getting a false order id
-    it('should throw a order not found message for a false order id', (done) => {
+    // test for getting a string order id
+    it('should throw a order not found message for a string order id', (done) => {
         chai.request(server)
             .get('/api/v1/orders/" "')
             .end((err, res) => {
-                const {
-                    orderId,
-                    userId,
-                    foodItems,
-                    totalAmount,
-                    orderStatus,
-                    deliveryAddress,
-                    orderDate,
-                } = newOrder;
                 expect(res.status).to.equal(404);
-                expect(res.body).to.be.eql({
-                    status: 'Failure',
-                    message: 'Order not found',
-                    data: [{
-                        location: 'params',
-                        param: 'orderId',
-                        msg: 'Order id must be an integer',
-                        value: '" "'
-                    }]
-                });
+                expect(res.body.status).to.be.eql('Failure');
+                expect(res.body.message).to.be.eql('Order not found');
+                expect(res.body.data[0].msg).to.be.eql('Order id must be an integer');
+                done(err);
+            });
+    });
+
+    // test for getting a non-existent order
+    it('should throw a order not found message for a string order id', (done) => {
+        chai.request(server)
+            .get('/api/v1/orders/700')
+            .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body.status).to.be.eql('Failure');
+                expect(res.body.message).to.be.eql('Order not found');
                 done(err);
             });
     });
@@ -161,7 +238,7 @@ describe('Order Controller', () => {
             .end((err, res) => {
                 expect(res.status).to.equal(404);
                 expect(res.body).to.be.eql({
-                    status: 'failure',
+                    status: 'Failure',
                     message: 'Order not found'
                 });
                 done(err);
