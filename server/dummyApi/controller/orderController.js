@@ -104,7 +104,6 @@ export default class Order {
                 status: 'success',
                 data: orderDb[req.params.orderId - 1],
             });
-
         }
     }
 }
