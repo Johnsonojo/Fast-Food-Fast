@@ -16,7 +16,7 @@ export default class Order {
      */
     static getAllOrders(req, res) {
         return res.status(200).json({
-            status: 'success',
+            status: 'Success',
             message: 'All orders fetched',
             data: orderDb,
         });
@@ -35,12 +35,12 @@ export default class Order {
 
         if (!result) {
             res.status(404).json({
-                status: 'failure',
+                status: 'Failure',
                 message: 'Order not found',
             });
         } else {
             res.status(200).json({
-                status: 'success',
+                status: 'Success',
                 message: `Order  ${result.orderId}  fetched`,
                 data: result,
             });
@@ -75,7 +75,7 @@ export default class Order {
         };
         orderDb.push(newOrder);
         return res.status(201).json({
-            status: 'success',
+            status: 'Success',
             message: 'New order was created',
             data: orderDb[orderDb.length - 1],
         });
@@ -94,17 +94,16 @@ export default class Order {
 
         if (!result) {
             res.status(404).json({
-                status: 'failure',
+                status: 'Failure',
                 message: 'Order not found',
             });
         } else {
             orderDb[req.params.orderId - 1].orderStatus = req.body.orderStatus;
             return res.status(200).json({
                 message: `orderStatus  of order ${result.orderId} is updated`,
-                status: 'success',
+                status: 'Success',
                 data: orderDb[req.params.orderId - 1],
             });
-
         }
     }
 }
