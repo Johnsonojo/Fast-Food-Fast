@@ -7,8 +7,7 @@
         "start": "babel-watch server/app.js",
         "coverage": "nyc report --reporter=text-lcov | coveralls",
         "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
-        "test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-core/register --require babel-polyfill --recursive server/tests/ --timeout 15000 --exit",
-        "test:dev": "mocha --compilers js:babel-core/register --require babel-polyfill --recursive server/tests/ --timeout 15000 --exit"
+        "test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-core/register --require babel-polyfill --recursive server/tests/ --timeout 15000 --exit"
     },
     "repository": {
         "type": "git",
