@@ -21,6 +21,9 @@
         "url": "https://github.com/Johnsonojo/Fast-Food-Fast/issues"
     },
     "homepage": "https://github.com/Johnsonojo/Fast-Food-Fast#readme",
+    "devDependencies": {
+
+    },
     "dependencies": {
         "babel-watch": "^2.0.7",
         "body-parser": "^1.18.3",
@@ -35,9 +38,7 @@
         "mocha": "^5.2.0",
         "mocha-lcov-reporter": "^1.3.0",
         "nyc": "^13.0.1",
-        "volleyball": "^1.5.1"
-    },
-    "devDependencies": {
+        "volleyball": "^1.5.1",
         "babel-cli": "^6.26.0",
         "babel-core": "^6.26.3",
         "babel-polyfill": "^6.26.0",
