@@ -4,6 +4,7 @@
     "description": "Fast-Food-Fast is a food delivery service app for a restaurant",
     "main": "index.js",
     "scripts": {
+        "start:dev": "babel-watch server/app.js",
         "start": "babel-watch server/app.js",
         "coverage": "nyc report --reporter=text-lcov | coveralls",
         "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
