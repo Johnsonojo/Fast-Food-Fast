@@ -1,6 +1,6 @@
 // importing express and other modules
 import express from 'express';
-// import logger from 'volleyball';
+import logger from 'volleyball';
 import bodyParser from 'body-parser';
 import validation from 'express-validator';
 
@@ -11,16 +11,16 @@ import routecontroller from './dummyApi/route/index';
 const app = express();
 
 // Log requests to the console.
-// app.use(logger);
+app.use(logger);
 
 // body-parser configuration
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.get('/', (req, res) => res.status(200).json({
-//     status: 'success',
-//     message: 'Welcome to Fast-Food-Fast, a platform to order for food',
-// }));
+app.get('/', (req, res) => res.status(200).json({
+    status: 'Success',
+    message: 'Welcome to Fast-Food-Fast, a platform to order for food',
+}));
 
 
 app.use(validation());
