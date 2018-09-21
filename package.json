@@ -4,8 +4,8 @@
     "description": "Fast-Food-Fast is a food delivery service app for a restaurant",
     "main": "index.js",
     "scripts": {
-        "start:dev": "babel-watch server/app.js",
         "start": "babel-watch server/app.js",
+        "start:dev": "babel-watch server/app.js",
         "coverage": "nyc report --reporter=text-lcov | coveralls",
         "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
         "test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-core/register --require babel-polyfill --recursive server/tests/ --timeout 15000 --exit",
@@ -21,9 +21,7 @@
         "url": "https://github.com/Johnsonojo/Fast-Food-Fast/issues"
     },
     "homepage": "https://github.com/Johnsonojo/Fast-Food-Fast#readme",
-    "devDependencies": {
-
-    },
+    "devDependencies": {},
     "dependencies": {
         "babel-watch": "^2.0.7",
         "body-parser": "^1.18.3",
