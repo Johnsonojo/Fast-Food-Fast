@@ -17,10 +17,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => res.status(200).json({
-    status: 'success',
-    message: 'Welcome to Fast-Food-Fast, a platform to order for food',
-}));
+// app.get('/', (req, res) => res.status(200).json({
+//     status: 'success',
+//     message: 'Welcome to Fast-Food-Fast, a platform to order for food',
+// }));
 
 
 app.use(validation());
