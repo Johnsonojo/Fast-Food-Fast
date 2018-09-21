@@ -17,6 +17,7 @@ https://johnsonojo.github.io/Fast-Food-Fast/
 * [Installation](#installation)
 * [Tests](#tests)
 * [Endpoints](#endpoints)
+* [Authors](#authors)
 
 ## Features
 Here are the list of features Fast-Food-Fast offers:
@@ -56,9 +57,13 @@ These instructions will get you a copy of the project up and running on your loc
 ## Endpoints
 
 <table>
-<tr><th>*http verbs*</th><th>*Short-listed endpoints*</th><th> *Functionality* </th></tr>
+<tr><th>Http verbs</th><th>Endpoints</th><th>Functionality</th></tr>
 <tr><td>GET</td><td>/orders</td><td> Gets all orders</td></tr>
 <tr><td>GET</td><td>/orders/:orderId</td><td>Gets an order by id</td></tr>
 <tr><td>POST</td><td>/orders </td><td> Adds a new order</td></tr>
 <tr><td>PUT</td><td> /orders/:orderId </td><td> Updates the status of an order</td></tr>
 </table>
+
+## Authors
+
+Johnson Ojo
