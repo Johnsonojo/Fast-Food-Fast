@@ -155,6 +155,7 @@ label {
     text-align: center;
     color: white;
     font-size: 26px;
+    padding: 18px;
 }
 
 
@@ -347,7 +348,9 @@ select {
 /* inspiration from w3school.com */
 
 
-/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+/* Responsive layout - when the screen is less than 800px wide, 
+make the two columns stack on top of each other instead of next to each other 
+(also change the direction - make the "cart" column go on top) */
 
 @media (max-width: 800px) {
     .row {
@@ -437,6 +440,7 @@ h3.topmessag {
 
 h2.topmessages {
     color: white;
+    padding-left: 10px;
 }
 
 .text-center {
@@ -586,6 +590,8 @@ form {
     }
     form {
         padding-bottom: 40px;
+        padding-right: 18px;
+        padding-left: 18px;
     }
 }
 
@@ -685,7 +691,8 @@ tr:nth-child(even) {
 /* DELETE BUTTON MODAL */
 
 
-/* inspitation from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_bottom */
+/* inspitation from 
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_bottom */
 
 
 /* The Modal (background) */
