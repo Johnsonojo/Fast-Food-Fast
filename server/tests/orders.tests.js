@@ -11,7 +11,7 @@ describe('Order Controller', () => {
         foodName: 'Meat Pie',
         foodPrice: 250,
         qty: 9,
-        orderStatus: 'Completed',
+        orderStatus: 'Complete',
         deliveryAddress: '29, Ikorodu road Lagos'
     };
 
@@ -25,11 +25,12 @@ describe('Order Controller', () => {
                 expect(res.body.status).to.equal('Success');
                 expect(res.body.message).to.equal('New order was created');
                 expect(res.body.data.orderId).to.be.eql(4);
-                expect(res.body.data.orderStatus).to.be.eql('Completed');
+                expect(res.body.data.orderStatus).to.be.eql('Complete');
                 expect(res.body.data.totalAmount).to.be.eql(2250);
                 done(err);
             });
     });
+
 
     // test for posting an order with an empty food name
     it('should not create a new order with an empty food name', (done) => {
@@ -37,7 +38,7 @@ describe('Order Controller', () => {
             foodName: '',
             foodPrice: 250,
             qty: 9,
-            orderStatus: 'Completed',
+            orderStatus: 'Complete',
             deliveryAddress: '29, Ikorodu road Lagos'
         };
         chai.request(server)
@@ -58,7 +59,7 @@ describe('Order Controller', () => {
             foodName: 2,
             foodPrice: 250,
             qty: 9,
-            orderStatus: 'Completed',
+            orderStatus: 'Complete',
             deliveryAddress: '29, Ikorodu road Lagos'
         };
         chai.request(server)
@@ -80,7 +81,7 @@ describe('Order Controller', () => {
             foodName: 'Meat Pie',
             foodPrice: '',
             qty: 9,
-            orderStatus: 'Completed',
+            orderStatus: 'Complete',
             deliveryAddress: '29, Ikorodu road Lagos'
         };
         chai.request(server)
@@ -101,7 +102,7 @@ describe('Order Controller', () => {
             foodName: 'Meat Pie',
             foodPrice: 'hi',
             qty: 9,
-            orderStatus: 'Completed',
+            orderStatus: 'Complete',
             deliveryAddress: '29, Ikorodu road Lagos'
         };
         chai.request(server)
@@ -122,7 +123,7 @@ describe('Order Controller', () => {
             foodName: 'Meat Pie',
             foodPrice: 300,
             qty: 'hello',
-            orderStatus: 'Completed',
+            orderStatus: 'Complete',
             deliveryAddress: '29, Ikorodu road Lagos'
         };
         chai.request(server)
@@ -182,7 +183,7 @@ describe('Order Controller', () => {
                 expect(res.body.data.orderId).to.be.eql(4);
                 expect(res.body.data.userId).to.be.eql(4);
                 expect(res.body.data.totalAmount).to.be.eql(2250);
-                expect(res.body.data.orderStatus).to.be.eql('Completed');
+                expect(res.body.data.orderStatus).to.be.eql('Complete');
                 done(err);
             });
     });
@@ -215,7 +216,7 @@ describe('Order Controller', () => {
     // test for updating the status of an order
     it('should update an order', (done) => {
         const updateOrder = {
-            orderStatus: 'Pending',
+            orderStatus: 'New',
         };
         chai.request(server)
             .put('/api/v1/orders/3')
@@ -230,7 +231,7 @@ describe('Order Controller', () => {
     // test for updating the status of a not existing order
     it('should throw a 404 error when wanting to update a non-existent order', (done) => {
         const updateOrder = {
-            orderStatus: 'Pending',
+            orderStatus: 'Complete',
         };
         chai.request(server)
             .put('/api/v1/orders/40')
@@ -245,10 +246,27 @@ describe('Order Controller', () => {
             });
     });
 
+    // test for updating the status of an order using random strings
+    it('should not update an order using random strings', (done) => {
+        const updateOrder = {
+            orderStatus: 'kkljhgf',
+        };
+        chai.request(server)
+            .put('/api/v1/orders/3')
+            .send(updateOrder)
+            .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body.status).to.be.eql('Failure');
+                expect(res.body.message).to.be.eql('Validation not successful');
+                expect(res.body.data[0].msg).to.be.eql('Order status is either New, Processing, Cancelled or Complete');
+                done(err);
+            });
+    });
+
     // test for updating the status of an order with a string id
     it('should throw an error when trying to update a string order id', (done) => {
         const updateOrder = {
-            orderStatus: 'Pending',
+            orderStatus: 'Processing',
         };
         chai.request(server)
             .put('/api/v1/orders/u')
@@ -256,7 +274,7 @@ describe('Order Controller', () => {
             .end((err, res) => {
                 expect(res.status).to.equal(404);
                 expect(res.body.status).to.be.eql('Failure');
-                expect(res.body.message).to.be.eql('Validation not sucessful');
+                expect(res.body.message).to.be.eql('Validation not successful');
                 expect(res.body.data[0].msg).to.be.eql('Order id must be an integer');
                 done(err);
             });
@@ -289,7 +307,7 @@ describe('Order Controller', () => {
             .end((err, res) => {
                 expect(res.status).to.equal(404);
                 expect(res.body.status).to.be.eql('Failure');
-                expect(res.body.message).to.be.eql('Validation not sucessful');
+                expect(res.body.message).to.be.eql('Validation not successful');
                 expect(res.body.data[0].msg).to.be.eql('Order status must be a string');
                 done(err);
             });
