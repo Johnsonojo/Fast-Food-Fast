@@ -39,13 +39,14 @@ class OrderValidator {
         req.checkBody('orderStatus', 'Order status must be a string').isString();
         req.checkParams('orderId', 'Order id must not be empty').notEmpty();
         req.checkParams('orderId', 'Order id must be an integer').isInt();
+        req.checkBody('orderStatus', 'Order status is either New, Processing, Cancelled or Complete').isIn(['New', 'Processing', 'Cancelled', 'Complete']);
 
         const errors = req.validationErrors();
 
         if (errors) {
             return res.status(404).json({
                 status: 'Failure',
-                message: 'Validation not sucessful',
+                message: 'Validation not successful',
                 data: errors,
             });
         }
@@ -68,6 +69,7 @@ class OrderValidator {
         req.checkBody('qty', 'Quantity must be an integer').isInt();
         req.checkBody('orderStatus', 'Order status must not be empty').notEmpty();
         req.checkBody('orderStatus', 'Order status must be a string').isString();
+        req.checkBody('orderStatus', 'Order status is either New, Processing, Cancelled or Complete').isIn(['New', 'Processing', 'Cancelled', 'Complete']);
         req.checkBody('deliveryAddress', 'Delivery address must not be empty').notEmpty();
         req.checkBody('deliveryAddress', 'Delivery address must be a string').isString();
         // req.checkBody('foodId', 'food id must not be empty').notEmpty().isInt();
