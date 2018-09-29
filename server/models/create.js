@@ -30,9 +30,9 @@ CREATE TABLE orders(
   user_id INTEGER NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id));`;
 
-const foodQuery = `
-DROP TABLE IF EXISTS food CASCADE;
-CREATE TABLE food(
+const menuQuery = `
+DROP TABLE IF EXISTS menu CASCADE;
+CREATE TABLE menu(
   id SERIAL PRIMARY KEY,
   foodname VARCHAR(50) NOT NULL,
   foodprice VARCHAR(50) NOT NULL,
@@ -51,7 +51,7 @@ db.query(userQuery).then((response) => {
         } else {
             console.log('Error while creating orders table');
         }
-        db.query(foodQuery).then((response) => {
+        db.query(menuQuery).then((response) => {
             if (response) {
                 console.log('Successfully created food table');
             } else {

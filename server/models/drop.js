@@ -9,13 +9,13 @@ DROP TABLE IF EXISTS orders cascade;
 DROP TYPE IF EXISTS order_status;`;
 
 const dropFoodTable = `
-DROP TABLE IF EXISTS food cascade`;
+DROP TABLE IF EXISTS menu cascade`;
 
 db.query(dropFoodTable).then((response) => {
     if (response) {
-        console.log('Successfully dropped and unseeded food table');
+        console.log('Successfully dropped and unseeded menu table');
     } else {
-        console.log('Error dropping and unseeding food table');
+        console.log('Error dropping and unseeding menu table');
     }
     db.query(dropOrdersTable).then((response) => {
         if (response) {
