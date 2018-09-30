@@ -10,12 +10,16 @@
         "db:migrate": "set NODE_ENV=development&& babel-node server/models/create.js",
         "db:seed": "set NODE_ENV=development&& babel-node server/models/dbSeed.js",
         "drop-table": "set NODE_ENV=development&& babel-node server/models/drop.js",
-        "pretest": "set NODE_ENV=test&& npm run db:setup",
+        "db:testmigrate": "set NODE_ENV=test&& babel-node server/models/create.js",
+        "db:testseed": "set NODE_ENV=test&& babel-node server/models/dbSeed.js",
+        "db:testsetup": "npm run migrate-testdb && npm run db:testseed",
+        "drop-testTable": "set NODE_ENV=test&& babel-node server/models/drop.js",
         "migrate-testdb": "set NODE_ENV=test&& babel-node server/models/create.js",
+        "pretest": "set NODE_ENV=test&& npm run drop-testTable && npm run db:testsetup",
         "coverage": "nyc report --reporter=text-lcov | coveralls",
         "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
-        "test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-core/register --require babel-polyfill --recursive server/tests/ --timeout 15000 --exit",
-        "test:dev": "mocha --compilers js:babel-core/register --require babel-polyfill --recursive server/tests/ --timeout 15000 --exit"
+        "test": "set NODE_ENV=test&& nyc --reporter=html --reporter=text mocha --compilers js:babel-core/register --require babel-polyfill --recursive server/tests/__tests__ --timeout 15000 --exit",
+        "test:dev": "set NODE_ENV=test&& mocha --compilers js:babel-core/register --require babel-polyfill --recursive server/tests/__tests__ --timeout 15000 --exit"
     },
     "repository": {
         "type": "git",
@@ -27,14 +31,11 @@
         "url": "https://github.com/Johnsonojo/Fast-Food-Fast/issues"
     },
     "homepage": "https://github.com/Johnsonojo/Fast-Food-Fast#readme",
-
     "devDependencies": {
         "chai": "^4.1.2",
         "chai-http": "^4.2.0",
         "coveralls": "^3.0.2",
         "cross-env": "^5.2.0",
-        "mocha": "^5.2.0",
-        "mocha-lcov-reporter": "^1.3.0",
         "nyc": "^13.0.1"
     },
     "dependencies": {
@@ -53,8 +54,11 @@
         "express": "^4.16.3",
         "express-validator": "^5.3.0",
         "jsonwebtoken": "^8.3.0",
+        "mocha": "^5.2.0",
+        "mocha-lcov-reporter": "^1.3.0",
         "nyc": "^13.0.1",
         "pg": "^7.4.3",
+        "supertest": "^3.3.0",
         "volleyball": "^1.5.1"
     }
 }
