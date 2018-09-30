@@ -65,6 +65,48 @@ class AuthController {
                 error
             }));
     }
+
+    static login(req, res) {
+        const email = req.body.email.trim();
+        const { password } = req.body;
+
+        db.query('SELECT * FROM users where email = $1', [email])
+            .then((user) => {
+                if (user.rowCount < 1) {
+                    return res.status(404).json({
+                        status: 'failure',
+                        message: 'User not found',
+                    });
+                }
+                const passwordIsValid = bcrypt
+                    .compareSync(password, user.rows[0].password);
+                if (!passwordIsValid) {
+                    return res
+                        .status(401).json({ auth: false, token: null });
+                }
+                const { id, email, role } = user.rows[0];
+                const payload = {
+                    id,
+                    email,
+                    role
+                };
+                const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 86400 }); //24 hours
+
+                return res.status(200).json({
+                    status: 'success',
+                    message: 'User login successful',
+                    data: {
+                        auth: true,
+                        token
+                    }
+                });
+            })
+            .catch(error => res.status(500).json({
+                status: 'failure',
+                message: 'internal server error',
+                error
+            }));
+    }
 }
 
 export default AuthController;
