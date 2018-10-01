@@ -105,7 +105,6 @@ describe('Login Controller', () => {
             .post('/api/v1/auth/login')
             .send(invalidPwd)
             .end((err, res) => {
-                console.log(res.body);
                 expect(res.status).to.equal(401);
                 expect(res.body).to.be.an('object');
                 expect(res.body.auth).to.equal(false);
