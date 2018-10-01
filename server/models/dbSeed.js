@@ -2,6 +2,7 @@ import db from './dbConnect';
 import userSeed from './users';
 import orderSeed from './orders';
 import menuSeed from './menu';
+import cartSeed from './foodItems';
 
 db.query(userSeed).then((response) => {
     if (response) {
@@ -21,7 +22,14 @@ db.query(userSeed).then((response) => {
             } else {
                 console.log('Error while seeding menu table');
             }
-            db.end();
+            db.query(cartSeed).then((response) => {
+                if (response) {
+                    console.log('Successfully seeded cart table');
+                } else {
+                    console.log('Error while seeding cart table');
+                }
+                db.end();
+            });
         });
     });
 });

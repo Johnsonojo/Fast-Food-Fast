@@ -1,6 +1,6 @@
 // importing express and other modules
 import express from 'express';
-import logger from 'volleyball';
+// import logger from 'volleyball';
 import bodyParser from 'body-parser';
 import validation from 'express-validator';
 
@@ -11,7 +11,7 @@ import routecontroller from './route';
 const app = express();
 
 // Log requests to the console.
-app.use(logger);
+// app.use(logger);
 
 // body-parser configuration
 app.use(bodyParser.json());
