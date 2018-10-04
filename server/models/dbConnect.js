@@ -1,5 +1,7 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
+import parseUrl from 'parse-database-url';
+
 import config from '../config/config';
 
 dotenv.config();
@@ -11,7 +13,9 @@ if (nodeEnv === 'development') {
     db = config.development;
 } else if (nodeEnv === 'test') {
     db = config.test;
-} else { db = process.env.DATABASE_URL; }
+} else if (nodeEnv === 'production') {
+    db = parseUrl(process.env.DATABASE_URL);
+}
 
 console.log('Working...please wait');
 console.log(nodeEnv);

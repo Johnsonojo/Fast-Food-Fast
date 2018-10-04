@@ -9,8 +9,6 @@ CREATE TABLE users(id SERIAL PRIMARY KEY,
   email VARCHAR(50) NOT NULL,
   password VARCHAR(255) NOT NULL,
   role user_status DEFAULT 'user',
-  phone VARCHAR(50),
-  address TEXT,
   created_date TIMESTAMP Default Now(),
   modified_date TIMESTAMP Default Now());`;
 
@@ -20,11 +18,13 @@ DROP TYPE IF EXISTS order_status;
 CREATE TYPE order_status AS ENUM('New','Processing','Cancelled','Complete');
 CREATE TABLE orders(
   id SERIAL PRIMARY KEY,
-  foodname VARCHAR(50) NOT NULL,
-  foodprice INTEGER NOT NULL,
+  foodName VARCHAR(50) NOT NULL,
+  foodPrice INTEGER NOT NULL,
   qty INTEGER NOT NULL,
-  totalamount INTEGER NOT NULL,
-  orderstatus order_status DEFAULT 'New',
+  totalAmount INTEGER NOT NULL,
+  orderStatus order_status DEFAULT 'New',
+  phone VARCHAR(50),
+  address VARCHAR(100),
   created_date TIMESTAMP Default Now(),
   modified_date TIMESTAMP Default Now(),
   user_id INTEGER NOT NULL,
@@ -44,8 +44,8 @@ const foodItemsQuery = `
   DROP TABLE IF EXISTS cart CASCADE;
   CREATE TABLE cart(
     id SERIAL PRIMARY KEY,
-    foodname VARCHAR(50) NOT NULL,
-    foodprice VARCHAR(50) NOT NULL,
+    foodName VARCHAR(50) NOT NULL,
+    foodPrice VARCHAR(50) NOT NULL,
     qty INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
     order_id INTEGER NOT NULL,

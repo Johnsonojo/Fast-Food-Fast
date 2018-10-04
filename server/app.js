@@ -1,17 +1,20 @@
 // importing express and other modules
 import express from 'express';
-// import logger from 'volleyball';
+import dotenv from 'dotenv';
+import logger from 'volleyball';
 import bodyParser from 'body-parser';
 import validation from 'express-validator';
 
 // importing the routes
 import routecontroller from './route';
 
+dotenv.config();
+
 // Setup the express app
 const app = express();
 
 // Log requests to the console.
-// app.use(logger);
+app.use(logger);
 
 // body-parser configuration
 app.use(bodyParser.json());

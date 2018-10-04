@@ -7,13 +7,13 @@ dotenv.config();
 const hashedPassword = bcrypt.hashSync(process.env.MY_PASSWORD, 10);
 
 const userSeed = `
-INSERT INTO users(username,email,password,role,phone,address)
-VALUES ('Johnson','johnson@gmail.com','${hashedPassword}','admin','2348188699277','234 Ikorodu road Anthony');
-INSERT INTO users(username,email,password,role,phone,address)
-VALUES ('Adesewa','adesewa@gmail.com','${hashedPassword}','user','2348188699277','234 Ikorodu road Anthony');
-INSERT INTO users(username,email,password,role,phone,address)
-VALUES ('Oluchi','oluchi@gmail.com','${hashedPassword}','user','2348188699277','234 Ikorodu road Anthony');
-INSERT INTO users(username,email,password,role,phone,address)
-VALUES ('Lovetta','lovetta@gmail.com','${hashedPassword}','user','2348188699277','234 Ikorodu road Anthony');`;
+INSERT INTO users(username,email,password,role)
+VALUES ('Johnson','johnson@gmail.com','${hashedPassword}','admin');
+INSERT INTO users(username,email,password,role)
+VALUES ('Adesewa','adesewa@gmail.com','${hashedPassword}','user');
+INSERT INTO users(username,email,password,role)
+VALUES ('Oluchi','oluchi@gmail.com','${hashedPassword}','user');
+INSERT INTO users(username,email,password,role)
+VALUES ('Lovetta','lovetta@gmail.com','${hashedPassword}','user');`;
 
 export default userSeed;
