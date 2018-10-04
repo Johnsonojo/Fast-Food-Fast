@@ -1,15 +1,20 @@
 import express from 'express';
 
-// import authValidator from '../middleware/authValidator';
 import menuController from '../controller/menuController';
+import authenticator from '../middleware/authenticate';
+import menuValidator from '../middleware/menuValidator';
+
 
 const menuRoute = express.Router();
 
-// // post /auth/signup
-// menuRoute.post('/signup', authValidator.validateSignUpInput,
-//     authController.signUp);
-
 // get /menu
-menuRoute.get('/', menuController.getAllMenu);
+menuRoute.get('/', authenticator.authenticateUser,
+    menuController.getAllMenu);
+
+// post /menu
+menuRoute.post('/', authenticator.authenticateUser,
+    authenticator.authenticateAdmin,
+    menuValidator.validateMenuInput,
+    menuController.postOneMenu);
 
 export default menuRoute;

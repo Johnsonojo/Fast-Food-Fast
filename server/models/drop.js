@@ -12,7 +12,7 @@ const dropMenuTable = `
 DROP TABLE IF EXISTS menu cascade`;
 
 const dropCartTable = `
-DROP TABLE IF EXISTS food_items cascade`;
+DROP TABLE IF EXISTS cart cascade`;
 
 db.query(dropCartTable).then((response) => {
     if (response) {

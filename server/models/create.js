@@ -34,9 +34,9 @@ const menuQuery = `
 DROP TABLE IF EXISTS menu CASCADE;
 CREATE TABLE menu(
   id SERIAL PRIMARY KEY,
-  foodname VARCHAR(50) NOT NULL,
-  foodprice VARCHAR(50) NOT NULL,
-  foodimage VARCHAR(100) NOT NULL,
+  foodName VARCHAR(50) NOT NULL,
+  foodPrice VARCHAR(50) NOT NULL,
+  foodImage VARCHAR(100) NOT NULL,
   created_date TIMESTAMP Default Now(),
   modified_date TIMESTAMP Default Now());`;
 
