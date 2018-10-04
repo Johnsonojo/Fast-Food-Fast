@@ -13,7 +13,7 @@ if (nodeEnv === 'development') {
     db = config.test;
 } else { db = process.env.DATABASE_URL; }
 
-console.log('creating...please wait');
+console.log('Working...please wait');
 console.log(nodeEnv);
 
 const pool = new pg.Pool(db);

@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const hashedPassword = bcrypt.hashSync(process.env.JWT_SECRET, 10);
+const hashedPassword = bcrypt.hashSync(process.env.MY_PASSWORD, 10);
 
 const userSeed = `
 INSERT INTO users(username,email,password,role,phone,address)
