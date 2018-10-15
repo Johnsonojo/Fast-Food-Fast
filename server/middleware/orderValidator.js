@@ -3,12 +3,10 @@
  */
 class OrderInputValidator {
     /**
-     * @method validateOrderId
-     * @static
-     * @description This sanitizes auth data
-     * @param {object} req request object
-     * @param {object} res response object
-     * @returns {Object} Object
+     * @description Validates order inputs
+     * @param {object} req 
+     * @param {object} res 
+     * @returns {Object} 
      */
     static validateOrderId(req, res, next) {
         req.check('orderId', 'Order Id must not be empty').notEmpty();
@@ -20,6 +18,35 @@ class OrderInputValidator {
                 status: 'failure',
                 message: 'Validation not successful',
                 data: errors
+            });
+        }
+        return next();
+    }
+
+    /**
+     * validates order input fields
+     * @param {Object} req
+     * @param {Object} res
+     * @param {Function} next
+     * @return {object}
+     */
+    static validateOrderBody(req, res, next) {
+        req.checkBody('foodName', 'food name must not be empty').notEmpty();
+        req.checkBody('foodName', 'food name must be a string').isString();
+        req.checkBody('foodPrice', 'food price must not be empty').notEmpty();
+        req.checkBody('foodPrice', 'food price must be an integer').isInt();
+        req.checkBody('qty', 'Quantity must not be empty').notEmpty();
+        req.checkBody('qty', 'Quantity must be an integer').isInt();
+        req.checkBody('address', 'Delivery address must not be empty').notEmpty();
+        req.checkBody('address', 'Delivery address must be a string').isString();
+
+        const errors = req.validationErrors();
+
+        if (errors) {
+            return res.status(404).json({
+                status: 'failure',
+                message: 'Order validation not successful',
+                data: errors,
             });
         }
         return next();

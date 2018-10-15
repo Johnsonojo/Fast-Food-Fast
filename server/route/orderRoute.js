@@ -14,4 +14,11 @@ orderRoute.get('/', authenticator.authenticateAdmin,
 orderRoute.get('/:orderId', authenticator.authenticateAdmin,
     orderValidator.validateOrderId,
     ordersController.getOneOrder);
+
+// post /orders
+orderRoute.post('/',
+    authenticator.authenticateUser,
+    orderValidator.validateOrderBody,
+    ordersController.postAnOrder);
+
 export default orderRoute;
