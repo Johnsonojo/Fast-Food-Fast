@@ -1,7 +1,15 @@
 import chaiHttp from 'chai-http';
 import chai from 'chai';
 import app from '../../app';
-import mockData from '../__mocks__/mockData';
+import userData from '../__mocks__/userData';
+import orderData from '../__mocks__/orderData';
+
+let userToken;
+const userSignin = '/api/v1/auth/login';
+const seededUser = {
+    email: 'adesewa@gmail.com',
+    password: 'johnson123',
+};
 
 const {
     signUpDetails,
@@ -10,7 +18,16 @@ const {
     wrongUser,
     notAUser,
     invalidPwd
-} = mockData;
+} = userData;
+
+const {
+    completeOrder,
+    noFoodName,
+    noFoodPrice,
+    noQty,
+    noAddress,
+    noPhone
+} = orderData;
 
 const { expect } = chai;
 
@@ -109,6 +126,98 @@ describe('Login Controller', () => {
                 expect(res.body).to.be.an('object');
                 expect(res.body.auth).to.equal(false);
                 expect(res.body.token).to.equal(null);
+                done(err);
+            });
+    });
+});
+
+describe('User Order', () => {
+    before((done) => {
+        chai.request(app)
+            .post(`${userSignin}`)
+            .send(seededUser)
+            .end((err, res) => {
+                userToken = res.body.data.token;
+                done(err);
+            });
+    });
+
+    it('should post an order to the database', (done) => {
+        chai.request(app)
+            .post('/api/v1/orders')
+            .set('token', userToken)
+            .send(completeOrder)
+            .end((err, res) => {
+                expect(res.status).to.equal(201);
+                expect(res.body).to.be.an('object');
+                expect(res.body.status).to.equal('success');
+                expect(res.body.message).to.equal('Order placed successfully');
+                expect(res.body.data).to.be.an('array');
+                done(err);
+            });
+    });
+
+    it('should not post an order without a food name', (done) => {
+        chai.request(app)
+            .post('/api/v1/orders')
+            .set('token', userToken)
+            .send(noFoodName)
+            .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body).to.be.an('object');
+                expect(res.body.status).to.equal('failure');
+                expect(res.body.message).to.equal('Order validation not successful');
+                expect(res.body.data).to.be.an('array');
+                expect(res.body.data[0].msg).to.equal('food name must not be empty');
+                done(err);
+            });
+    });
+
+    it('should not post an order without a food price', (done) => {
+        chai.request(app)
+            .post('/api/v1/orders')
+            .set('token', userToken)
+            .send(noFoodPrice)
+            .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body).to.be.an('object');
+                expect(res.body.status).to.equal('failure');
+                expect(res.body.message).to.equal('Order validation not successful');
+                expect(res.body.data).to.be.an('array');
+                expect(res.body.data[0].msg).to.equal('food price must not be empty');
+                done(err);
+            });
+    });
+
+    it('should not post an order without quantity', (done) => {
+        chai.request(app)
+            .post('/api/v1/orders')
+            .set('token', userToken)
+            .send(noQty)
+            .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body).to.be.an('object');
+                expect(res.body.status).to.equal('failure');
+                expect(res.body.message).to.equal('Order validation not successful');
+                expect(res.body.data).to.be.an('array');
+                expect(res.body.data[0].msg).to.equal('Quantity must not be empty');
+                done(err);
+            });
+    });
+
+
+    it('should not post an order without an address', (done) => {
+        chai.request(app)
+            .post('/api/v1/orders')
+            .set('token', userToken)
+            .send(noAddress)
+            .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body).to.be.an('object');
+                expect(res.body.status).to.equal('failure');
+                expect(res.body.message).to.equal('Order validation not successful');
+                expect(res.body.data).to.be.an('array');
+                expect(res.body.data[0].msg).to.equal('Delivery address must not be empty');
                 done(err);
             });
     });

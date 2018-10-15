@@ -19,8 +19,8 @@ class UserController {
         const paswordHash = bcrypt.hashSync(req.body.password.trim(), 10);
 
         const text = `
-        INSERT INTO users(username, email, password) VALUES($1, $2, $3) RETURNING *;`;
-        const values = [username, email, paswordHash];
+        INSERT INTO users(username, email, password, confirm_password) VALUES($1, $2, $3, $4) RETURNING *;`;
+        const values = [username, email, paswordHash, paswordHash];
 
         // check if user exist in the database
         db.query('SELECT * FROM users where email = $1', [email])

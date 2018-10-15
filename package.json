@@ -19,7 +19,8 @@
         "coverage": "nyc report --reporter=text-lcov | coveralls",
         "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
         "test": "set NODE_ENV=test&& nyc --reporter=html --reporter=text mocha --compilers js:babel-core/register --require babel-polyfill --recursive server/tests/__tests__ --timeout 15000 --exit",
-        "test:dev": "set NODE_ENV=test&& mocha --compilers js:babel-core/register --require babel-polyfill --recursive server/tests/__tests__ --timeout 15000 --exit"
+        "test:dev": "set NODE_ENV=test&& mocha --compilers js:babel-core/register --require babel-polyfill --recursive server/tests/__tests__ --timeout 15000 --exit",
+        "heroku-postbuild": "babel-node server/models/create.js && babel-node server/models/dbSeed.js"
     },
     "repository": {
         "type": "git",
@@ -35,8 +36,7 @@
         "chai": "^4.1.2",
         "chai-http": "^4.2.0",
         "coveralls": "^3.0.2",
-        "cross-env": "^5.2.0",
-        "nyc": "^13.0.1"
+        "cross-env": "^5.2.0"
     },
     "dependencies": {
         "babel-cli": "^6.26.0",
@@ -57,6 +57,7 @@
         "mocha": "^5.2.0",
         "mocha-lcov-reporter": "^1.3.0",
         "nyc": "^13.0.1",
+        "parse-database-url": "^0.3.0",
         "pg": "^7.4.3",
         "supertest": "^3.3.0",
         "volleyball": "^1.5.1"
