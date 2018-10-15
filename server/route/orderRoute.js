@@ -21,4 +21,9 @@ orderRoute.post('/',
     orderValidator.validateOrderBody,
     ordersController.postAnOrder);
 
+// put /orders/:orderId
+orderRoute.put('/:orderId', authenticator.authenticateAdmin,
+    orderValidator.validateOrderStatus,
+    ordersController.updateOrderStatus);
+
 export default orderRoute;

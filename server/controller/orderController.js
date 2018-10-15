@@ -2,7 +2,6 @@ import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import db from '../models/dbConnect';
 
-
 dotenv.config();
 
 const secret = process.env.JWT_SECRET;
@@ -107,6 +106,49 @@ class OrdersController {
             .catch((error) => {
                 res.status(500).json({
                     status: 'Failure',
+                    message: 'Internal server error',
+                    error
+                });
+            });
+    }
+
+    /**
+     * @description Update the status of an order
+     * @param {object} req
+     * @param {object} res
+     * @returns {object} object
+     */
+    static updateOrderStatus(req, res) {
+        const { orderId } = req.params;
+        const { orderStatus } = req.body;
+
+        db.query(`SELECT * FROM orders WHERE orders.id = ${[orderId]}`)
+            .then((result) => {
+                if (result.rowCount < 1) {
+                    return res.status(404).json({
+                        status: 'failure',
+                        message: 'Order not found',
+                    });
+                }
+                return db.query('UPDATE orders SET orderstatus = $1 WHERE orders.id = $2', [orderStatus, orderId])
+                    .then((result) => {
+                        res.status(200).json({
+                            status: 'success',
+                            message: `Status of order ${orderId} successfully modified by you`,
+                            data: `Order status is ${orderStatus}`
+                        });
+                    })
+                    .catch((error) => {
+                        return res.status(500).json({
+                            status: 'failure',
+                            message: 'Internal server error',
+                            error
+                        });
+                    });
+            })
+            .catch((error) => {
+                res.status(500).json({
+                    status: 'failure',
                     message: 'Internal server error',
                     error
                 });

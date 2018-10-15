@@ -51,5 +51,33 @@ class OrderInputValidator {
         }
         return next();
     }
+
+    /**
+     * @description checks an order status
+     * @param {Object} req
+     * @param {Object} res
+     * @param {Function} next
+     * @return {object}
+     */
+
+    static validateOrderStatus(req, res, next) {
+        req.checkBody('orderStatus', 'Order status must not be empty').notEmpty();
+        req.checkBody('orderStatus', 'Order status must be a string').isString();
+        req.checkParams('orderId', 'Order id must not be empty').notEmpty();
+        req.checkParams('orderId', 'Order id must be an integer').isInt();
+        req.checkBody('orderStatus', 'Order status is either New, Processing, Cancelled or Complete')
+            .isIn(['New', 'Processing', 'Cancelled', 'Complete']);
+
+        const errors = req.validationErrors();
+
+        if (errors) {
+            return res.status(404).json({
+                status: 'failure',
+                message: 'Validation not successful',
+                data: errors,
+            });
+        }
+        return next();
+    }
 }
 export default OrderInputValidator;
