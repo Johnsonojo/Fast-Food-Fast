@@ -17,9 +17,6 @@ const config = {
         password: process.env.TEST_DB_PASSWORD,
         port: process.env.TEST_DB_PORT,
     },
-    production: {
-        database: process.env.DATABASE_URL,
-    },
     jwtSecret: process.env.JWT_SECRET,
 };
 
