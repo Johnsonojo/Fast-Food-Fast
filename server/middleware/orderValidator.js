@@ -79,5 +79,29 @@ class OrderInputValidator {
         }
         return next();
     }
+
+    /**
+     * @description checks an order status
+     * @param {Object} req
+     * @param {Object} res
+     * @param {Function} next
+     * @return {object}
+     */
+
+    static validateOrderHistory(req, res, next) {
+        req.checkParams('userId', 'User id must not be empty').notEmpty();
+        req.checkParams('userId', 'User id must be an integer').isInt();
+
+        const errors = req.validationErrors();
+
+        if (errors) {
+            return res.status(404).json({
+                status: 'failure',
+                message: 'Validation not successful',
+                data: errors,
+            });
+        }
+        return next();
+    }
 }
 export default OrderInputValidator;

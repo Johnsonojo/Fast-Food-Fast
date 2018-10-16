@@ -51,7 +51,7 @@ describe('Order Controller', () => {
             .end((err, res) => {
                 expect(res.status).to.equal(200);
                 expect(res.body).to.be.an('object');
-                expect(res.body.status).to.equal('Success');
+                expect(res.body.status).to.equal('success');
                 expect(res.body.message).to.equal('Order 1 successfully fetched');
                 done(err);
             });
@@ -64,7 +64,7 @@ describe('Order Controller', () => {
             .end((err, res) => {
                 expect(res.status).to.equal(404);
                 expect(res.body).to.be.an('object');
-                expect(res.body.status).to.equal('Failure');
+                expect(res.body.status).to.equal('failure');
                 expect(res.body.message).to.equal('Order not found');
                 done(err);
             });

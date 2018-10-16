@@ -124,8 +124,8 @@ describe('Login Controller', () => {
             .end((err, res) => {
                 expect(res.status).to.equal(401);
                 expect(res.body).to.be.an('object');
-                expect(res.body.auth).to.equal(false);
-                expect(res.body.token).to.equal(null);
+                expect(res.body.status).to.equal('failure');
+                expect(res.body.message).to.equal('Password does not match');
                 done(err);
             });
     });
@@ -218,6 +218,46 @@ describe('User Order', () => {
                 expect(res.body.message).to.equal('Order validation not successful');
                 expect(res.body.data).to.be.an('array');
                 expect(res.body.data[0].msg).to.equal('Delivery address must not be empty');
+                done(err);
+            });
+    });
+
+    it('should get all the orders of a user', (done) => {
+        chai.request(app)
+            .get('/api/v1/users/2/orders')
+            .set('token', userToken)
+            .end((err, res) => {
+                expect(res.status).to.equal(200);
+                expect(res.body).to.be.an('object');
+                expect(res.body.status).to.equal('success');
+                expect(res.body.message).to.equal('orders fetched successfully');
+                done(err);
+            });
+    });
+
+    it('should throw user not found error', (done) => {
+        chai.request(app)
+            .get('/api/v1/users/500/orders')
+            .set('token', userToken)
+            .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body).to.be.an('object');
+                expect(res.body.status).to.equal('failure');
+                expect(res.body.message).to.equal('User not found');
+                done(err);
+            });
+    });
+
+    it('should throw an error for a wrong userId', (done) => {
+        chai.request(app)
+            .get('/api/v1/users/50jhgfhjj0/orders')
+            .set('token', userToken)
+            .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body).to.be.an('object');
+                expect(res.body.status).to.equal('failure');
+                expect(res.body.message).to.equal('Validation not successful');
+                expect(res.body.data[0].msg).to.equal('User id must be an integer');
                 done(err);
             });
     });

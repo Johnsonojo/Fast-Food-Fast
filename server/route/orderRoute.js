@@ -26,4 +26,10 @@ orderRoute.put('/:orderId', authenticator.authenticateAdmin,
     orderValidator.validateOrderStatus,
     ordersController.updateOrderStatus);
 
+// get users/userId/orders
+orderRoute.get('/:userId/orders',
+    authenticator.authenticateUser,
+    orderValidator.validateOrderHistory,
+    ordersController.userOrderHistory);
+
 export default orderRoute;

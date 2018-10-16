@@ -19,7 +19,8 @@
         "coverage": "nyc report --reporter=text-lcov | coveralls",
         "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
         "test": "set NODE_ENV=test&& nyc --reporter=html --reporter=text mocha --compilers js:babel-core/register --require babel-polyfill --recursive server/tests/__tests__ --timeout 15000 --exit",
-        "test:dev": "set NODE_ENV=test&& mocha --compilers js:babel-core/register --require babel-polyfill --recursive server/tests/__tests__ --timeout 15000 --exit"
+        "test:dev": "set NODE_ENV=test&& mocha --compilers js:babel-core/register --require babel-polyfill --recursive server/tests/__tests__ --timeout 15000 --exit",
+        "heroku-postbuild": "babel-node server/models/create.js && babel-node server/models/dbSeed.js"
     },
     "repository": {
         "type": "git",

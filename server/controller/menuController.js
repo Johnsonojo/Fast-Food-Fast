@@ -12,17 +12,18 @@ class MenuController {
     static getAllMenu(req, res) {
         db.query('SELECT * from menu')
             .then((result) => {
+                if (!result) {
+                    return res.status(404).json({
+                        status: 'failure',
+                        message: 'Menus not found',
+                    });
+                }
                 res.status(200).json({
                     status: 'success',
                     message: 'All menu fetched',
                     data: result.rows,
                 });
-            })
-            .catch(error => res.status(500).json({
-                status: 'error',
-                mesage: 'internal server error',
-                error
-            }));
+            });
     }
 
     /**
@@ -57,13 +58,6 @@ class MenuController {
                             error
                         });
                     });
-            })
-            .catch((error) => {
-                res.status(500).json({
-                    status: 'Failure',
-                    message: 'Internal server error',
-                    error
-                });
             });
     }
 }
