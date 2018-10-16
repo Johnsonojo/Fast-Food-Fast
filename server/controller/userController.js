@@ -15,7 +15,7 @@ class UserController {
 
     static signUp(req, res) {
         const username = req.body.username.trim();
-        const email = req.body.email.trim();
+        const email = req.body.email.trim().toLowerCase();
         const paswordHash = bcrypt.hashSync(req.body.password.trim(), 10);
 
         const text = `
@@ -39,7 +39,6 @@ class UserController {
                         const token = jwt.sign(payload, process.env.JWT_SECRET, {
                             expiresIn: 86400
                         }); //24 hours
-                        // data to display after success
                         const data = {
                             id: newUser.rows[0].id,
                             username: newUser.rows[0].username,
@@ -57,12 +56,7 @@ class UserController {
                         mesage: 'internal server error',
                         error
                     }));
-            })
-            .catch(error => res.status(500).json({
-                status: 'error',
-                mesage: 'internal server error',
-                error
-            }));
+            });
     }
 
     static login(req, res) {
@@ -80,7 +74,10 @@ class UserController {
                 const passwordIsValid = bcrypt
                     .compareSync(password, user.rows[0].password);
                 if (!passwordIsValid) {
-                    return res.status(401).json({ auth: false, token: null });
+                    return res.status(401).json({
+                        status: 'failure',
+                        message: 'Password does not match',
+                    });
                 }
                 const { id, email, role } = user.rows[0];
                 const payload = { id, email, role };
@@ -92,16 +89,10 @@ class UserController {
                     status: 'success',
                     message: 'User login successful',
                     data: {
-                        auth: true,
                         token
                     }
                 });
-            })
-            .catch(error => res.status(500).json({
-                status: 'failure',
-                message: 'internal server error',
-                error
-            }));
+            });
     }
 }
 

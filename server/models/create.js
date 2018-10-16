@@ -10,8 +10,6 @@ CREATE TABLE users(id SERIAL PRIMARY KEY,
   password VARCHAR(255) NOT NULL,
   confirm_password VARCHAR(255) NOT NULL,
   role user_status DEFAULT 'user',
-  phone VARCHAR(50),
-  address TEXT,
   created_date TIMESTAMP Default Now(),
   modified_date TIMESTAMP Default Now());`;
 

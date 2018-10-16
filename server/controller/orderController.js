@@ -16,17 +16,18 @@ class OrdersController {
     static getAllOrder(req, res) {
         db.query('SELECT * from orders')
             .then((result) => {
+                if (!result) {
+                    return res.status(404).json({
+                        status: 'failure',
+                        message: 'Orders not found',
+                    });
+                }
                 res.status(200).json({
                     status: 'success',
                     message: 'All order fetched',
                     data: result.rows,
                 });
-            })
-            .catch(error => res.status(500).json({
-                status: 'error',
-                mesage: 'internal server error',
-                error
-            }));
+            });
     }
 
     /**
@@ -41,21 +42,16 @@ class OrdersController {
             .then((result) => {
                 if (result.rowCount < 1) {
                     return res.status(404).json({
-                        status: 'Failure',
+                        status: 'failure',
                         message: 'Order not found',
                     });
                 }
                 return res.status(200).json({
-                    status: 'Success',
+                    status: 'success',
                     message: `Order ${orderId} successfully fetched`,
                     data: result.rows
                 });
-            })
-            .catch(error => res.status(500).send({
-                status: 'Failure',
-                mesage: 'Internal server error',
-                error
-            }));
+            });
     }
 
     /**
@@ -80,32 +76,16 @@ class OrdersController {
         req.token = verifiedToken;
         const userId = req.token.id;
 
-        db.query('SELECT * from menu where foodName = $1', [foodName])
-            .then((foodExists) => {
-                if (!foodExists) {
-                    return res.status(409).json({
-                        status: 'failure',
-                        message: 'Menu does not exist in the database',
-                    });
-                }
-                return db.query('INSERT INTO orders(foodName, foodPrice, qty, address, phone, totalAmount, user_id)' +
-                        ' values($1, $2, $3, $4, $5, $6, $7) RETURNING *', [foodName, foodPrice, qty, address, phone, totalAmount, userId])
-                    .then(result => res.status(201).json({
-                        status: 'success',
-                        message: 'Order placed successfully',
-                        data: result.rows
-                    }))
-                    .catch((error) => {
-                        res.status(500).json({
-                            status: 'failure',
-                            message: 'Internal server error',
-                            error
-                        });
-                    });
-            })
+        db.query('INSERT INTO orders(foodName, foodPrice, qty, address, phone, totalAmount, user_id)' +
+                ' values($1, $2, $3, $4, $5, $6, $7) RETURNING *', [foodName, foodPrice, qty, address, phone, totalAmount, userId])
+            .then(result => res.status(201).json({
+                status: 'success',
+                message: 'Order placed successfully',
+                data: result.rows
+            }))
             .catch((error) => {
                 res.status(500).json({
-                    status: 'Failure',
+                    status: 'failure',
                     message: 'Internal server error',
                     error
                 });
@@ -145,12 +125,29 @@ class OrdersController {
                             error
                         });
                     });
-            })
-            .catch((error) => {
-                res.status(500).json({
-                    status: 'failure',
-                    message: 'Internal server error',
-                    error
+            });
+    }
+
+    /**
+     * @description get the order history of a user
+     * @param {object} req
+     * @param {object} res
+     * @returns {object} object
+     */
+    static userOrderHistory(req, res) {
+        const { userId } = req.params;
+        db.query('SELECT * FROM orders WHERE user_id=$1', [userId])
+            .then((result) => {
+                if (result.rowCount === 0) {
+                    return res.status(404).json({
+                        status: 'failure',
+                        message: 'User not found',
+                    });
+                }
+                res.status(200).json({
+                    status: 'success',
+                    message: 'orders fetched successfully',
+                    data: result.rows,
                 });
             });
     }
