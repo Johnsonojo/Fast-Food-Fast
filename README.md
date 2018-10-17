@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/Johnsonojo/Fast-Food-Fast.svg?branch=develop)](https://travis-ci.org/Johnsonojo/Fast-Food-Fast)
 [![Coverage Status](https://coveralls.io/repos/github/Johnsonojo/Fast-Food-Fast/badge.svg?branch=develop)](https://coveralls.io/github/Johnsonojo/Fast-Food-Fast?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/0dff9f9c223093a97031/maintainability)](https://codeclimate.com/github/Johnsonojo/Fast-Food-Fast/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/0dff9f9c223093a97031/test_coverage)](https://codeclimate.com/github/Johnsonojo/Fast-Food-Fast/test_coverage)
 
 
 Fast-Food-Fast is a food delivery service app for a restaurant.
@@ -82,3 +83,8 @@ particular user</td></tr>
 ## Authors
 
 Johnson Ojo
+
+## Acknowledgement
+
+* Andela
+* w3schools.com
