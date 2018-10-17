@@ -101,7 +101,6 @@ class OrdersController {
     static updateOrderStatus(req, res) {
         const { orderId } = req.params;
         const { orderStatus } = req.body;
-
         db.query(`SELECT * FROM orders WHERE orders.id = ${[orderId]}`)
             .then((result) => {
                 if (result.rowCount < 1) {
