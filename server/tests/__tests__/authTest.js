@@ -48,7 +48,7 @@ describe('Authenticator', () => {
                 expect(res.status).to.equal(401);
                 expect(res.body).to.be.an('object');
                 expect(res.body.status).to.equal('failure');
-                expect(res.body.message).to.equal('User not authenticated. No token provided');
+                expect(res.body.message).to.equal('User authentication invalid');
                 done(err);
             });
     });

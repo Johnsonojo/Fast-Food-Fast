@@ -48,7 +48,7 @@ describe('Menu Controller', () => {
             });
     });
 
-    it('should allow admin to add a menu database', (done) => {
+    it('should allow admin to add a menu to the database', (done) => {
         chai.request(app)
             .post('/api/v1/menu')
             .set('token', userToken)
@@ -100,6 +100,46 @@ describe('Menu Controller', () => {
                 expect(res.body).to.be.an('object');
                 expect(res.body.status).to.equal('failure');
                 expect(res.body.message).to.equal('User authentication invalid');
+                done(err);
+            });
+    });
+
+    it('should allow admin to delete a menu from the database', (done) => {
+        chai.request(app)
+            .delete('/api/v1/menu/4')
+            .set('token', userToken)
+            .end((err, res) => {
+                expect(res.status).to.equal(200);
+                expect(res.body).to.be.an('object');
+                expect(res.body.status).to.equal('Success');
+                expect(res.body.message).to.equal('Menu 4 deleted successfully');
+                done(err);
+            });
+    });
+
+    it('should throw an error when trying to delete a food id that does not exist', (done) => {
+        chai.request(app)
+            .delete('/api/v1/menu/200')
+            .set('token', userToken)
+            .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body).to.be.an('object');
+                expect(res.body.status).to.equal('Failure');
+                expect(res.body.message).to.equal('Menu not found');
+                done(err);
+            });
+    });
+
+    it('should throw an error when trying to delete a string food id', (done) => {
+        chai.request(app)
+            .delete('/api/v1/menu/iid')
+            .set('token', userToken)
+            .end((err, res) => {
+                expect(res.status).to.equal(400);
+                expect(res.body).to.be.an('object');
+                expect(res.body.status).to.equal('failure');
+                expect(res.body.message).to.equal('Menu validation not successful');
+                expect(res.body.data[0].msg).to.equal('menu id must be a number');
                 done(err);
             });
     });
