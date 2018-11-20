@@ -78,6 +78,8 @@ particular user</td></tr>
 <tr><td>PUT</td><td> http:localhost:8000/api/v1/orders/:orderId </td><td> Admin can update the status of an order</td></tr>
 <tr><td>GET</td><td>http:localhost:8000/api/v1/menu </td><td> Users and admin can get available menu</td></tr>
 <tr><td>POST</td><td>http:localhost:8000/api/v1/menu </td><td> Admin can post a menu</td></tr>
+<tr><td>DELETE</td><td>http:localhost:8000/api/v1/menu/:menuId </td><td> Admin can delete a specific menu</td></tr>
+<tr><td>PUT</td><td>http:localhost:8000/api/v1/menu/:menuId </td><td> Admin can edit a specific menu</td></tr>
 </table>
 
 ## Authors

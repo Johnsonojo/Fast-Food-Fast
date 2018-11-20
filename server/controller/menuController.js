@@ -44,8 +44,8 @@ class MenuController {
                     });
                 }
 
-                return db.query('INSERT INTO menu(foodName, foodPrice, foodImage)' +
-                        ' values($1, $2, $3) RETURNING *', [foodName, foodPrice, foodImage])
+                return db.query('INSERT INTO menu(foodName, foodPrice, foodImage)'
+                    + ' values($1, $2, $3) RETURNING *', [foodName, foodPrice, foodImage])
                     .then(result => res.status(201).json({
                         status: 'Success',
                         message: 'Menu created successfully',
@@ -58,6 +58,39 @@ class MenuController {
                             error
                         });
                     });
+            });
+    }
+
+    /**
+    * @description deletes a menu
+    * @param {object} req
+    * @param {object} res
+    * @returns {object} object
+    */
+    static deleteOneMenu(req, res) {
+        const { menuId } = req.params;
+        db.query('SELECT * FROM menu WHERE id = $1', [menuId])
+            .then((result) => {
+                if (result.rowCount !== 0) {
+                    db.query('DELETE FROM menu where id = $1', [menuId])
+                        .then((deleteResult) => {
+                            if (deleteResult.rowCount === 1) {
+                                return res.status(200).json({
+                                    status: 'Success',
+                                    message: `Menu ${menuId} deleted successfully`
+                                });
+                            }
+                        })
+                        .catch(error => res.status(500).send({
+                            status: 'Failure',
+                            mesage: 'Internal server error',
+                        }));
+                } else {
+                    return res.status(404).json({
+                        status: 'Failure',
+                        message: 'Menu not found'
+                    });
+                }
             });
     }
 }

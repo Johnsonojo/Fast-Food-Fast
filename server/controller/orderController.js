@@ -77,7 +77,7 @@ class OrdersController {
         const userId = req.token.id;
 
         db.query('INSERT INTO orders(foodName, foodPrice, qty, address, phone, totalAmount, user_id)' +
-                ' values($1, $2, $3, $4, $5, $6, $7) RETURNING *', [foodName, foodPrice, qty, address, phone, totalAmount, userId])
+            ' values($1, $2, $3, $4, $5, $6, $7) RETURNING *', [foodName, foodPrice, qty, address, phone, totalAmount, userId])
             .then(result => res.status(201).json({
                 status: 'success',
                 message: 'Order placed successfully',
