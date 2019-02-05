@@ -41,45 +41,25 @@ CREATE TABLE menu(
   created_date TIMESTAMP Default Now(),
   modified_date TIMESTAMP Default Now());`;
 
-const foodItemsQuery = `
-  DROP TABLE IF EXISTS cart CASCADE;
-  CREATE TABLE cart(
-    id SERIAL PRIMARY KEY,
-    foodname VARCHAR(50) NOT NULL,
-    foodprice VARCHAR(50) NOT NULL,
-    qty INTEGER NOT NULL,
-    user_id INTEGER NOT NULL,
-    order_id INTEGER NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (order_id) REFERENCES orders(id));`;
-
-
 db.query(userQuery).then((response) => {
+  if (response) {
+    console.log('Successfully created users table');
+  } else {
+    console.log('Error while creating users table');
+  }
+  db.query(orderQuery).then((response) => {
     if (response) {
-        console.log('Successfully created users table');
+      console.log('Successfully created orders table');
     } else {
-        console.log('Error while creating users table');
+      console.log('Error while creating orders table');
     }
-    db.query(orderQuery).then((response) => {
-        if (response) {
-            console.log('Successfully created orders table');
-        } else {
-            console.log('Error while creating orders table');
-        }
-        db.query(menuQuery).then((response) => {
-            if (response) {
-                console.log('Successfully created menu table');
-            } else {
-                console.log('Error while creating menu table');
-            }
-            db.query(foodItemsQuery).then((response) => {
-                if (response) {
-                    console.log('Successfully created cart table');
-                } else {
-                    console.log('Error while creating cart table');
-                }
-                db.end();
-            });
-        });
+    db.query(menuQuery).then((response) => {
+      if (response) {
+        console.log('Successfully created menu table');
+      } else {
+        console.log('Error while creating menu table');
+      }
+      db.end();
     });
+  });
 });

@@ -8,7 +8,6 @@ const menuRoute = express.Router();
 
 // get /menu
 menuRoute.get('/',
-    authenticator.authenticateUser,
     menuController.getAllMenu);
 
 // post /menu
